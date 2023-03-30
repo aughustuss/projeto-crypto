@@ -7,17 +7,18 @@ const App = () => {
   const [isTop, setIsTop] = useState(true);
   useEffect(() => {
     const handleScroll = () => {
-      if(window.scrollY > 60){
-        setIsTop(false);
-      } else if (window.scrollY === 0) {
+      if (window.scrollY === 0) {
         setIsTop(true);
+      } else if (window.scrollY > 60) {
+        setIsTop(false);
       }
     }
     window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('scroll', handleScroll);
     }
   }, [])
+
   return (
     <>
       <BrowserRouter>

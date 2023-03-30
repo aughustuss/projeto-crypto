@@ -1,56 +1,11 @@
 import React, { useContext, useState } from 'react'
 import { BsFillSunFill, BsMoonFill } from 'react-icons/bs'
 import Switch from 'react-switch'
-import {  MenuItem, TextField, createTheme, ThemeProvider } from '@mui/material'
+import {  MenuItem, ThemeProvider } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { CryptoState } from '../Contexts/Context'
-import styled from '@emotion/styled'
 
-const StyledTextField = styled(TextField)({
-    '& .MuiOutlinedInput-root': {
-        '& fieldset': {
-            'borderColor': 'rgb(147, 51, 234)'
-        },
-        '&:hover fieldset': {
-            'borderColor': 'rgb(147, 51, 234)'
-        },
-        '& input': {
-            'color': 'rgb(163, 163, 163) !important'
-        },
-        '& textarea': {
-            'color': 'rgb(163, 163, 163)'
-        },
-        '& .MuiInputBase-input': {
-            color: 'rgb(163, 163, 163)',
-        },
-    }
 
-})
-
-const theme = createTheme({
-    components: {
-        MuiFormHelperText: {
-            styleOverrides: {
-                root: {
-                    color: 'gray'
-                }
-            }
-        },
-        MuiFormLabel: {
-            styleOverrides: {
-                root: {
-                    color: 'rgb(147, 51, 234)'
-                }
-            }
-        }
-    },
-    palette: {
-        mode: 'light',
-        primary: {
-            main: 'rgb(147, 51, 234)',
-        }
-    }
-})
 const Navbar = ({ isTop }) => {
     const navColor = isTop ? '' : 'bg-neutral-900'
     const navigate = useNavigate();
@@ -58,7 +13,7 @@ const Navbar = ({ isTop }) => {
     const handleChange = (e) => {
         setCurrency(e.target.value);
     }
-    const { dark, toggleDarkMode } = CryptoState();
+    const { dark, toggleDarkMode, theme, StyledTextField } = CryptoState();
 
 
 

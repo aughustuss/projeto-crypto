@@ -42,7 +42,7 @@ const Home = () => {
                 to={`coin/${item.id}`}
                 className='h-fit w-fit '
             >
-                <img className='p-10 md:p-10 lg:p-14 ' src={item.image} alt={item.name} />
+                <img className='p-10 md:p-10 lg:p-16 ' src={item.image} alt={item.name} />
                 <div className='flex flex-row justify-center items-center gap-2'>
                     <span className='text-md uppercase text-purple-700'> {item.symbol}</span>
                     <span className={`${profit && profit ? 'text-green-600' : 'text-red-600'}`} >{profit && '+ '}{item.price_change_percentage_24h?.toFixed(2)}%</span>
