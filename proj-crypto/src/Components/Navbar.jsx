@@ -1,26 +1,41 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { BsFillSunFill, BsMoonFill } from 'react-icons/bs'
 import Switch from 'react-switch'
-import {  MenuItem, ThemeProvider } from '@mui/material'
+import { MenuItem, ThemeProvider } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { CryptoState } from '../Contexts/Context'
 
-
-const Navbar = ({ isTop }) => {
-    const navColor = isTop ? '' : 'bg-neutral-900'
+const Navbar = () => {
     const navigate = useNavigate();
     const { currency, setCurrency } = CryptoState()
+    const [isTop, setIsTop] = useState(true);
+
+    useEffect(() => {
+        const logScrollPosition = () => {
+            console.log(window.scrollY);
+            if (window.scrollY > 60) {
+                setIsTop(false);
+            } else if (window.scrollY === 0) {
+                setIsTop(true);
+            }
+        }
+
+        window.addEventListener('scroll', logScrollPosition);
+
+        return () => {
+            window.removeEventListener('scroll', logScrollPosition);
+        }
+    }, []);
+
     const handleChange = (e) => {
         setCurrency(e.target.value);
     }
     const { dark, toggleDarkMode, theme, StyledTextField } = CryptoState();
 
-
-
     return (
         <>
             <ThemeProvider theme={theme} >
-                <nav className={` ${navColor} fixed top-0 py-4 w-full z-40 transition duration-500 `} >
+                <nav className={` bg-neutral-900 fixed shadow-md shadow-black z-40 py-4 w-full transition duration-500 `} >
                     <div className={`  flex items-center justify-between mx-auto w-5/6 `}>
                         <p onClick={() => {
                             navigate('/')
@@ -33,7 +48,7 @@ const Navbar = ({ isTop }) => {
                                 select
                                 size='small'
                                 onChange={handleChange}
-                                style={{color: 'white'}}
+                                style={{ color: 'white' }}
                             >
                                 <MenuItem value={'BRL'} >BRL</MenuItem>
                                 <MenuItem value={'USD'}>USD</MenuItem>

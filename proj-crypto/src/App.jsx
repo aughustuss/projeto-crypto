@@ -4,25 +4,10 @@ import Navbar from './Components/Navbar'
 import CryptoCoin from './Pages/CryptoCoin'
 import Home from './Pages/Home'
 const App = () => {
-  const [isTop, setIsTop] = useState(true);
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY === 0) {
-        setIsTop(true);
-      } else if (window.scrollY > 60) {
-        setIsTop(false);
-      }
-    }
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    }
-  }, [])
-
   return (
     <>
       <BrowserRouter>
-        <Navbar isTop={isTop} />
+        <Navbar />
         <Routes>
           <Route path='/' element={<Home />} index />
           <Route path='/coin/:id' element={<CryptoCoin />} />

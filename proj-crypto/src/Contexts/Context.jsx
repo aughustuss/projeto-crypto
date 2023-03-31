@@ -8,6 +8,9 @@ export const CryptoState = () => {
     return useContext(Crypto)
 }
 
+export function price(num){
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 export const StyledTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
@@ -45,6 +48,13 @@ export const theme = createTheme({
                     color: 'rgb(147, 51, 234)'
                 }
             }
+        },
+        MuiPaginationItem:{
+            styleOverrides:{
+                root:{
+                    color: 'rgb(147, 51, 234)'
+                }
+            }
         }
     },
     palette: {
@@ -76,7 +86,7 @@ const CryptoContext = ({ children }) => {
     return (
         <Crypto.Provider
             value={{
-                currency, setCurrency, symbol, dark ,toggleDarkMode, StyledTextField, theme
+                currency, setCurrency, symbol, dark ,toggleDarkMode, StyledTextField, theme, price
             }}
         >
             {children}

@@ -6,12 +6,9 @@ import AliceCarousel from 'react-alice-carousel'
 import { Link } from 'react-router-dom'
 import CoinsTable from '../Components/CoinsTable'
 
-export function price(num){
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
 
 const Home = () => {
-    const { dark, toggleDarkMode, currency, symbol } = CryptoState();
+    const { dark, toggleDarkMode, currency, symbol, price } = CryptoState();
     const [trending, setTrending] = useState([]);
 
     const responsive = {
@@ -55,9 +52,9 @@ const Home = () => {
     return (
         <>
             <div className={` ${dark ? 'bg-slate-100' : 'bg-neutral-800'} font-oswald font-bold w-screen h-screen overflow-x-hidden`}>
-                <div className='h-full w-full flex justify-center mx-auto pt-14'>
+                <div className=' w-full flex justify-center mx-auto pt-14'>
                     <div className='h-4/6 md:h-5/6 lg:h-5/6 w-5/6  flex items-center text-center flex-col  pt-24' >
-                        <div className='h-1/2 w-full  justify-evenly flex flex-col'>
+                        <div className='h-1/2 w-full  justify-evenly gap-4 flex flex-col'>
                             <p className={`${dark ? 'text-black' : 'text-white'} text-6xl md:text-8xl`}>Análise de Criptomoedas</p>
                             <p className='text-neutral-400' >Tenha todas as informações de qualquer moeda ou procure a sua favorita!</p>
                         </div>
