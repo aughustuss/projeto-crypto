@@ -35,9 +35,9 @@ const CoinsTable = () => {
         <>
             <ThemeProvider theme={theme}>
                 <div className='w-5/6 mx-auto md:h-full ' >
-                    <div className='w-full flex flex-col gap-4 '>
+                    <div className='w-full flex flex-col gap-4 pt-12'>
                         <div className='flex flex-col gap-4'>
-                            <p className={`${dark ? 'text-black' : 'text-white'} text-6xl text-center`}>Veja todas as informações das suas Cripto Moedas preferidas!</p>
+                            <p className={`${dark ? 'text-black' : 'text-white'} text-4xl text-center`}>Veja todas as informações das suas Cripto Moedas preferidas!</p>
                             <StyledTextField
                                 label='Pesquise por uma moeda'
                                 fullWidth
