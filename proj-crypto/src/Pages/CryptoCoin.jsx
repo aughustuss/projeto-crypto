@@ -10,22 +10,23 @@ const CryptoCoin = () => {
     const { id } = useParams();
     const [coin, setCoin] = useState();
     const { currency, symbol, dark } = CryptoState();
-
+    const [loading, setLoading] = useState(true)
     const fetchCoin = async () => {
         try {
             const res = await axios.get(SingleCoin(id.toLowerCase()));
-            console.log(res);
             setCoin(res.data);
+            setLoading(false);
         } catch (err) {
             console.log(err)
         }
     }
-    console.log('coin: ', coin);
+
     useEffect(() => {
         fetchCoin();
     }, [])
     return (
         <>
+            {!loading ? (
             <div className={` ${dark ? 'bg-slate-100' : 'bg-neutral-800'} h-screen w-screen flex justify-center`}>
                 <div className={` ${dark ? 'text-black' : 'text-white'} h-full pt-20 w-5/6 flex justify-center md:flex-row flex-col`} >
                     <div className='w-full md:w-2/5 lg:w-2/5 h-full flex flex-col lg:border-r p-2 lg:border-slate-300 items-center' >
@@ -35,7 +36,7 @@ const CryptoCoin = () => {
                         <div className='font-bold text-xl md:text-2xl items-start w-full flex flex-col gap-4 lg:pt-12' >
                             <p>Rank: {coin?.market_cap_rank}</p>
                             <p>Preço atual: {symbol}{" "}{price(coin?.market_data.current_price[currency.toLowerCase()])}</p>
-                            <p>Preço total do mercado: {symbol}{" "}{price(coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6))}M</p>
+                            <p>Preço total do mercado: {symbol}{" "}{price(coin?.market_data.market_cap[currency.toLowerCase()]?.toString().slice(0, -6))}M</p>
                         </div>
                     </div>
                     <div className='w-full sm:w-3/5 lg:w-3/5 h-full ' >
@@ -43,6 +44,11 @@ const CryptoCoin = () => {
                     </div>
                 </div>
             </div>
+            ) : (
+                <div>
+                    Opa
+                </div>
+            )}
         </>
     )
 }
