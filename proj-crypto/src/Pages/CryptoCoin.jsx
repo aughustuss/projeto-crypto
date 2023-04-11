@@ -49,8 +49,8 @@ const CryptoCoin = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className='flex flex-col w-full h-full justify-center items-center' >
-                        <p className='flex w-full' >Carregando...</p>
+                    <div className='flex flex-col w-full h-full text-center justify-center items-center' >
+                        <p className='flex w-full text-center' >Carregando...</p>
                         <LinearProgress />
                     </div>
                 )}

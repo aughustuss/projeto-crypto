@@ -35,22 +35,17 @@ const Navbar = () => {
                                 <MenuItem value={'BRL'} >BRL</MenuItem>
                                 <MenuItem value={'USD'}>USD</MenuItem>
                             </StyledTextField>
-                            <Switch
-                                checked={dark}
-                                onChange={toggleDarkMode}
-                                onColor='#000338'
-                                offColor='#FAC400'
-                                uncheckedIcon={
-                                    <div className='flex justify-center h-full items-center' >
-                                        <BsFillSunFill size={18} />
+                            <div onClick={toggleDarkMode} className='border border-neutral-800 hover:bg-neutral-800 transition duration-300 py-2 px-1 flex text-white hover:cursor-pointer rounded-md'>
+                                {!dark ? (
+                                    <div>
+                                        <BsFillSunFill size={24}/>
                                     </div>
-                                }
-                                checkedIcon={
-                                    <div className='flex justify-center h-full items-center' >
-                                        <BsMoonFill size={18} color='white' />
+                                ) : (
+                                    <div>
+                                        <BsMoonFill size={24}/>
                                     </div>
-                                }
-                            />
+                                )}
+                            </div>
                         </div>
                     </div>
                 </nav>
