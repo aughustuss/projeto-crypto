@@ -26,6 +26,18 @@ const CoinsTable = () => {
             console.log(err);
         }
     }
+
+    function scrollEl(elID){
+        const el = document.getElementById(elID);
+        if(el){
+            const elPos = el.getBoundingClientRect().top() + window.pageYOffset;
+            window.scrollTo({
+                top: elPos,
+                behavior: 'smooth'
+            })
+        }
+    }
+
     useEffect(() => {
         fetchCoins();
     }, [currency]);
@@ -36,7 +48,7 @@ const CoinsTable = () => {
             <ThemeProvider theme={theme}>
                 <div className='w-5/6 mx-auto md:h-full ' >
                     <div className='w-full flex flex-col gap-4 pt-12'>
-                        <div className='flex flex-col gap-4'>
+                        <div id='searchDiv' className='flex flex-col gap-4'>
                             <p className={`${dark ? 'text-black' : 'text-white'} text-4xl text-center`}>Veja todas as informações das suas Cripto Moedas preferidas!</p>
                             <StyledTextField
                                 label='Pesquise por uma moeda'
@@ -74,7 +86,7 @@ const CoinsTable = () => {
                                             filteredSearch.map((row) => {
                                                 let profit = row.price_change_percentage_24h >= 0;
                                                 return (
-                                                    <TableRow className={`hover:bg-neutral-500 transition duration-300 h-16 hover:cursor-pointer`} key={row.name} onClick={() => { navigate(`/coin/${row.name}`) }} >
+                                                    <TableRow className={`hover:bg-neutral-600 transition duration-300 h-16 hover:cursor-pointer`} key={row.name} onClick={() => { navigate(`/coin/${row.name}`) }} >
                                                         <TableCell scope='row'>
                                                             <div className='flex items-center'>
                                                                 <img src={row.image} alt={row.name} className='h-full lg:w-1/12 md:w-2/12 w-4/12' />
@@ -107,7 +119,7 @@ const CoinsTable = () => {
                                             coin.slice((page - 1) * 10, (page - 1) * 10 + 10).map((row) => {
                                                 let profit = row.price_change_percentage_24h >= 0;
                                                 return (
-                                                    <TableRow className='hover:bg-neutral-500 transition duration-300 h-16 hover:cursor-pointer' key={row.name} onClick={() => { navigate(`/coin/${row.name}`) }}  >
+                                                    <TableRow className='hover:bg-neutral-600 transition duration-300 h-16 hover:cursor-pointer' key={row.name} onClick={() => { navigate(`/coin/${row.name}`) }}  >
                                                         <TableCell scope='row'>
                                                             <div className='flex items-center'>
                                                                 <img src={row.image} alt={row.name} className='h-full lg:w-1/12 md:w-2/12 w-4/12' />
@@ -152,6 +164,7 @@ const CoinsTable = () => {
                             }}
                             onChange={(_, value) => {
                                 setPage(value);
+                                scrollEl('searchDiv');
                             }}
                         />
                     </div>
