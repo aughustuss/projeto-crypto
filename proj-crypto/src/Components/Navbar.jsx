@@ -8,24 +8,6 @@ import { CryptoState } from '../Contexts/Context'
 const Navbar = () => {
     const navigate = useNavigate();
     const { currency, setCurrency } = CryptoState()
-    const [isTop, setIsTop] = useState(true);
-
-    useEffect(() => {
-        const logScrollPosition = () => {
-            console.log(window.scrollY);
-            if (window.scrollY > 60) {
-                setIsTop(false);
-            } else if (window.scrollY === 0) {
-                setIsTop(true);
-            }
-        }
-
-        window.addEventListener('scroll', logScrollPosition);
-
-        return () => {
-            window.removeEventListener('scroll', logScrollPosition);
-        }
-    }, []);
 
     const handleChange = (e) => {
         setCurrency(e.target.value);
