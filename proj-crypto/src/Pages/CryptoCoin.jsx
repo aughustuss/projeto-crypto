@@ -38,9 +38,9 @@ const CryptoCoin = () => {
                                 <p className='text-4xl font-bold capitalize'>{coin?.name}</p>
                                 <p className='text-center' >{coin?.description.en.split('. ')[0]}.</p>
                                 <div className='font-extrabold text-xl md:text-2xl items-start w-full flex flex-col gap-4 lg:pt-12' >
-                                    <p>Rank: {coin?.market_cap_rank}</p>
-                                    <p>Preço atual: {symbol}{" "}{price(coin?.market_data.current_price[currency.toLowerCase()])}</p>
-                                    <p>Preço total do mercado: {symbol}{" "}{price(coin?.market_data.market_cap[currency.toLowerCase()]?.toString().slice(0, -6))}M</p>
+                                    <p>Rank - {coin?.market_cap_rank}</p>
+                                    <p>Preço atual - {symbol}{" "}{price(coin?.market_data.current_price[currency.toLowerCase()])}</p>
+                                    <p>Preço total do mercado - {symbol}{" "}{price(coin?.market_data.market_cap[currency.toLowerCase()]?.toString().slice(0, -6))}M</p>
                                 </div>
                             </div>
                             <div className='lg:w-3/5 flex flex-col h-full' >
