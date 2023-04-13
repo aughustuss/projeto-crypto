@@ -36,7 +36,7 @@ const CryptoCoin = () => {
                             <div className={`${dark ? 'border-slate-300' : 'border-neutral-600'} lg:w-2/5 h-full flex flex-col lg:border-r p-2  items-center`} >
                                 <img src={coin?.image.large} alt={coin?.name} className='lg:w-1/2' />
                                 <p className='text-4xl font-bold capitalize'>{coin?.name}</p>
-                                <p className='text-center' >{coin?.description.en.split('. ')[0]}.</p>
+                                <p className='text-center' dangerouslySetInnerHTML={{__html: (coin?.description.en.split('. ')[0])}}></p>
                                 <div className='font-extrabold text-xl md:text-2xl items-start w-full flex flex-col gap-4 lg:pt-12' >
                                     <p>Rank - {coin?.market_cap_rank}</p>
                                     <p>Preço atual - {symbol}{" "}{price(coin?.market_data.current_price[currency.toLowerCase()])}</p>
