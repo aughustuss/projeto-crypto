@@ -21,7 +21,7 @@ const Navbar = () => {
                     <div className={`  flex items-center justify-between mx-auto w-5/6 `}>
                         <p onClick={() => {
                             navigate('/')
-                        }} className='text-3xl hover:cursor-pointer text-purple-700 font-oswald font-extrabold'>Análise Cripta</p>
+                        }} className='text-4xl hover:cursor-pointer text-purple-700 font-oswald font-extrabold'>AD Cripto</p>
                         <div className='flex gap-8 justify-center items-center'>
                             <StyledTextField
                                 variant='outlined'

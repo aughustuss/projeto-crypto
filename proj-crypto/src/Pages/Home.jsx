@@ -51,7 +51,7 @@ const Home = () => {
     })
     return (
         <>
-            <div className={` ${dark ? 'bg-slate-100' : 'bg-neutral-800'} font-oswald font-bold w-screen h-screen overflow-x-hidden`}>
+            <div className={` ${dark ? 'bg-slate-100' : 'bg-neutral-800'} font-oswald font-bold w-screen h-fit overflow-x-hidden`}>
                 <div className=' w-full flex justify-center mx-auto pt-14'>
                     <div className='h-4/6 md:h-5/6 lg:h-5/6 w-5/6  flex items-center text-center flex-col  pt-24' >
                         <div className='h-1/2 w-full  justify-evenly gap-4 flex flex-col'>
