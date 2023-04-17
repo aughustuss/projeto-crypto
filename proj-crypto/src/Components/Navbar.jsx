@@ -21,7 +21,10 @@ const Navbar = () => {
                     <div className={`  flex items-center justify-between mx-auto w-5/6 `}>
                         <p onClick={() => {
                             navigate('/')
-                        }} className='text-4xl hover:cursor-pointer text-purple-700 font-oswald font-extrabold'>AD Cripto</p>
+                        }} className='text-2xl md:text-4xl hover:cursor-pointer text-purple-700 font-oswald font-extrabold flex flex-col gap-y-2 border-b border-purple-700'>
+                            ADCripto Analysis
+                            <span className='md:text-sm text-xs text-center text-white uppercase'>Análise de Criptomoedas</span>
+                        </p>
                         <div className='flex gap-8 justify-center items-center'>
                             <StyledTextField
                                 variant='outlined'
@@ -38,11 +41,11 @@ const Navbar = () => {
                             <div onClick={toggleDarkMode} className='border border-neutral-800 hover:bg-neutral-800 transition duration-300 py-2 px-1 flex text-white hover:cursor-pointer rounded-md'>
                                 {!dark ? (
                                     <div>
-                                        <BsFillSunFill size={24}/>
+                                        <BsFillSunFill size={24} />
                                     </div>
                                 ) : (
                                     <div>
-                                        <BsMoonFill size={24}/>
+                                        <BsMoonFill size={24} />
                                     </div>
                                 )}
                             </div>
