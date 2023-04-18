@@ -52,7 +52,8 @@ export const theme = createTheme({
         MuiPaginationItem:{
             styleOverrides:{
                 root:{
-                    color: 'rgb(147, 51, 234)'
+                    color: 'rgb(147, 51, 234)',
+                    fontSize: '8px'
                 }
             }
         }

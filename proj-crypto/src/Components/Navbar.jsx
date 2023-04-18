@@ -18,12 +18,12 @@ const Navbar = () => {
         <>
             <ThemeProvider theme={theme} >
                 <nav className={` bg-neutral-900 fixed shadow-md shadow-black z-40 py-4 w-full transition duration-500 `} >
-                    <div className={`  flex items-center justify-between mx-auto w-5/6 `}>
+                    <div className={`  flex items-center justify-between mx-auto w-5/6`}>
                         <p onClick={() => {
                             navigate('/')
-                        }} className='text-2xl md:text-4xl hover:cursor-pointer text-purple-700 font-oswald font-extrabold flex flex-col gap-y-2 border-b border-purple-700'>
+                        }} className='text-xl md:text-4xl hover:cursor-pointer text-purple-700 font-oswald font-extrabold flex flex-col md:gap-y-2 border-b border-purple-700'>
                             ADCripto Analysis
-                            <span className='md:text-sm text-xs text-center text-white uppercase'>Análise de Criptomoedas</span>
+                            <span className='md:text-sm text-[10px] text-center text-white uppercase'>Análise de Criptomoedas</span>
                         </p>
                         <div className='flex gap-8 justify-center items-center'>
                             <StyledTextField

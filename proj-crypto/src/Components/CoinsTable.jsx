@@ -27,9 +27,9 @@ const CoinsTable = () => {
         }
     }
 
-    function scrollEl(elID){
+    function scrollEl(elID) {
         const el = document.getElementById(elID);
-        if(el){
+        if (el) {
             const elPos = el.getBoundingClientRect().top() + window.pageYOffset;
             window.scrollTo({
                 top: elPos,
@@ -73,7 +73,7 @@ const CoinsTable = () => {
                                                             fontSize: '90%'
                                                         }}
                                                         key={item}
-                                                        align={item === 'Moeda' ? '' : 'right'}
+                                                        align={item === 'Moeda' ? 'inherit' : 'right'}
                                                     >
                                                         {item}
                                                     </TableCell>
@@ -87,7 +87,7 @@ const CoinsTable = () => {
                                                 let profit = row.price_change_percentage_24h >= 0;
                                                 return (
                                                     <TableRow className={`hover:bg-neutral-600 transition duration-300 h-16 hover:cursor-pointer`} key={row.name} onClick={() => { navigate(`/coin/${row.name}`) }} >
-                                                        <TableCell scope='row'>
+                                                        <TableCell align='inherit' scope='row'>
                                                             <div className='flex items-center'>
                                                                 <img src={row.image} alt={row.name} className='h-full lg:w-1/12 md:w-2/12 w-4/12' />
                                                                 <div className={`${dark ? 'text-black' : 'text-white'} flex flex-col justify-center font-bold w-1/2 h-full ml-4`}>
@@ -120,7 +120,7 @@ const CoinsTable = () => {
                                                 let profit = row.price_change_percentage_24h >= 0;
                                                 return (
                                                     <TableRow className='hover:bg-neutral-600 transition duration-300 h-16 hover:cursor-pointer' key={row.name} onClick={() => { navigate(`/coin/${row.name}`) }}  >
-                                                        <TableCell scope='row'>
+                                                        <TableCell align='inherit' scope='row'>
                                                             <div className='flex items-center'>
                                                                 <img src={row.image} alt={row.name} className='h-full lg:w-1/12 md:w-2/12 w-4/12' />
                                                                 <div className={`${dark ? 'text-black' : 'text-white'} flex flex-col justify-center font-bold w-1/2 h-full ml-4`}>
@@ -157,9 +157,10 @@ const CoinsTable = () => {
                             count={(coin.length / 10).toFixed(2)}
                             style={{
                                 justifyContent: 'center',
+                                alignItems: 'center',
                                 display: 'flex',
                                 padding: '20',
-                                width: '100%',
+                                width: '100%'
 
                             }}
                             onChange={(_, value) => {
