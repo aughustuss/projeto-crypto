@@ -27,17 +27,6 @@ const CoinsTable = () => {
         }
     }
 
-    function scrollEl(elID) {
-        const el = document.getElementById(elID);
-        if (el) {
-            const elPos = el.getBoundingClientRect().top() + window.pageYOffset;
-            window.scrollTo({
-                top: elPos,
-                behavior: 'smooth'
-            })
-        }
-    }
-
     useEffect(() => {
         fetchCoins();
     }, [currency]);
