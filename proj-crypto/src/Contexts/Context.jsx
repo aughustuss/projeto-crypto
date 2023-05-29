@@ -53,7 +53,7 @@ export const theme = createTheme({
             styleOverrides:{
                 root:{
                     color: 'rgb(147, 51, 234)',
-                    fontSize: '8px'
+                    fontSize: '12px'
                 }
             }
         }

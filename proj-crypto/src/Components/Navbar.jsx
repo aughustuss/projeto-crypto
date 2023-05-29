@@ -17,15 +17,15 @@ const Navbar = () => {
     return (
         <>
             <ThemeProvider theme={theme} >
-                <nav className={` bg-neutral-900 fixed shadow-md shadow-black z-40 w-full transition duration-500 `} >
-                    <div className={`  flex items-center justify-between mx-auto w-5/6`}>
+                <nav className='bg-neutral-900 fixed shadow-md shadow-black z-40 w-full transition duration-500 py-1' >
+                    <div className='flex items-center justify-between mx-auto w-5/6'>
                         <p onClick={() => {
                             navigate('/')
-                        }} className='text-xl md:text-3xl hover:cursor-pointer text-purple-700 font-oswald font-extrabold flex flex-col md:gap-y-2'>
-                            ADCripto Analysis
-                            <span className='md:text-sm text-[10px] text-center text-white uppercase'>Análise de Criptomoedas</span>
+                        }} className='text-xl md:text-2xl hover:cursor-pointer text-purple-700 font-oswald text-center font-semibold flex flex-col md:gap-y-[2px]'>
+                            ADCripto
+                            <span className='md:text-xs text-[10px] text-center text-white uppercase'>Análise de Criptomoedas</span>
                         </p>
-                        <div className='flex gap-8 justify-center items-center'>
+                        <div className='flex gap-4 justify-center items-center'>
                             <StyledTextField
                                 variant='outlined'
                                 value={currency}

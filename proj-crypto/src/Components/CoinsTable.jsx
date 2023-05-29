@@ -17,8 +17,9 @@ const CoinsTable = () => {
         try {
             const res = await axios.get(CoinList(currency), {
                 headers: {
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
+               
             })
             setCoin(res.data);
             setLoading(false)
@@ -35,7 +36,7 @@ const CoinsTable = () => {
     return (
         <>
             <ThemeProvider theme={theme}>
-                <div className='w-5/6 mx-auto md:h-full ' >
+                <div className='w-full ' >
                     <div className='w-full flex flex-col gap-4 pt-12'>
                         <div id='searchDiv' className='flex flex-col gap-4'>
                             <p className={`${dark ? 'text-black' : 'text-white'} text-4xl text-center`}>Veja todas as informações das suas Cripto Moedas preferidas!</p>
@@ -46,7 +47,7 @@ const CoinsTable = () => {
                                 value={search}
                             />
                         </div>
-                        <TableContainer >
+                        <TableContainer className='min-h-[900px] rounded-md'>
                             {loading ? (
                                 <LinearProgress />
                             ) : (

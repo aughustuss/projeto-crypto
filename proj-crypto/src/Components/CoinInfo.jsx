@@ -45,9 +45,10 @@ const CoinInfo = ({ coin }) => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <div className='flex'>
+        <div className='flex h-full w-full'>
           {!loading && historicalData.length > 1 ? (
-            <div className='flex w-full h-full flex-col'>
+            <div className='flex w-full h-full justify-between flex-col'>
+              <p className='text-center text-4xl'> {`Variação em ${days} ${days > 1 ? 'dias' : 'dia'}`}</p>
               <Line
                 data={{
                   labels: historicalData.map((item) => {
@@ -96,7 +97,7 @@ const CoinInfo = ({ coin }) => {
                   },
                 }}
               />
-              <div className='flex w-full justify-between mt-8 p-2 gap-8'>
+              <div className='flex lg:flex-row flex-col w-full justify-between mt-8 p-2 gap-2 lg:gap-8'>
                 {chartDays.map((day) => {
                   return (
                     <button
@@ -106,7 +107,7 @@ const CoinInfo = ({ coin }) => {
                         setSelected(day.value);
                       }}
                       value={day.value}
-                      className={`${selected === day.value ? 'border-purple-900 bg-purple-900 font-semibold ' : 'border-purple-600'} border-2 w-full rounded-sm p-2 hover:bg-purple-600 transition duration-500`}>{day.label}</button>
+                      className={`${selected === day.value ? 'border-purple-900 bg-purple-900 font-semibold ' : 'border-purple-600'} border-2 w-full rounded-md p-2 hover:bg-purple-600 transition duration-500`}>{day.label}</button>
                   )
                 })}
               </div>
