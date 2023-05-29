@@ -9,7 +9,7 @@ const Favorites = () => {
 
     return (
         <>
-            <div className={`${isOpen ? 'right-0' : '-right-full'} transition-all p-2 duration-200 bg-primary text-offwhite w-2/3 lg:w-2/5 shadow-md h-full z-30 fixed flex flex-col justify-between top-0`}>
+            <div className={`${isOpen ? 'right-0' : '-right-full'} transition-all p-2 duration-200 overflow-auto bg-primary text-offwhite w-2/3 lg:w-2/5 shadow-md h-full z-30 fixed flex flex-col justify-between top-0`}>
                 <div className='pt-20 px-2 flex flex-col gap-y-4'>
                     <p className='font-oswald text-center text-3xl font-semibold'>Veja aqui as suas moedas favoritadas</p>
                     <div className='flex flex-col gap-y-2'>
