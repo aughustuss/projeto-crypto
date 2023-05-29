@@ -1,16 +1,27 @@
-import React, { useEffect} from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { CryptoState, price } from '../Contexts/Context';
 import CoinInfo from '../Components/CoinInfo';
-import {  ThemeProvider } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import { theme } from '../Config/Theme'
+import axios from 'axios';
 
 const CryptoCoin = () => {
     const { id } = useParams();
-    const { currency, symbol, dark, handleFavoriteCoin, getSingleCoin, singleCoin } = CryptoState();
+    const { currency, symbol, dark, handleFavoriteCoin } = CryptoState();
+    const [singleCoin, setSingleCoin] = useState([]);
+    const getSingleCoin = async () => {
+        try {
+            const singleCoin = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}`);
+            setSingleCoin(singleCoin.data);
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
     useEffect(() => {
-        getSingleCoin(id);
-    }, []);
+        getSingleCoin();
+    }, [id]);
     return (
         <>
             <ThemeProvider theme={theme}>

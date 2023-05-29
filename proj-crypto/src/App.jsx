@@ -4,6 +4,7 @@ import Navbar from './Components/Navbar'
 import CryptoCoin from './Pages/CryptoCoin'
 import Home from './Pages/Home'
 import Footer from './Components/Footer'
+import Favorites from './Components/Favorites'
 const App = () => {
   return (
     <>
@@ -13,6 +14,7 @@ const App = () => {
           <Route path='/' element={<Home />} index />
           <Route path='/coin/:id' element={<CryptoCoin />} />
         </Routes>
+        <Favorites/>
         <Footer/>
       </BrowserRouter>
     </>

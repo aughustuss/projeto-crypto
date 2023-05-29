@@ -24,11 +24,19 @@ Chart.register(
 const CoinInfo = ({ coin }) => {
 
   const [selected, setSelected] = useState();
-  const { currency, days, setDays, getHistoricalCoin, historicalCoin } = CryptoState();
+  const { currency, days, setDays } = CryptoState();
+  const [historicalCoin, setHistoricalCoin] = useState([]);
   const { id } = useParams();
-  useEffect(() => {
-    getHistoricalCoin(id);
-  }, [days, currency]);
+
+  const getHistoricalCoin = async () => {
+    console.log(id);
+    try {
+        const historicalCoin = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=${currency}&days=${days}`);
+        setHistoricalCoin(historicalCoin.data);
+    } catch (error) {
+        console.log(error);
+    };
+};
   return (
     <>
       <ThemeProvider theme={theme}>

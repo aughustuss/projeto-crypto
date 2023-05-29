@@ -1,5 +1,6 @@
-import React from 'react'
-import { BsFillSunFill, BsMoonFill } from 'react-icons/bs'
+import React, { useState } from 'react'
+import {  BsMoonFill } from 'react-icons/bs'
+import {FaSun} from 'react-icons/fa'
 import { MdOutlineFavorite } from 'react-icons/md'
 import { MenuItem, ThemeProvider } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
@@ -7,15 +8,12 @@ import { CryptoState } from '../Contexts/Context'
 import { theme } from '../Config/Theme'
 import { StyledTextField } from '../Config/Theme'
 const Navbar = () => {
+    const {toggleDarkMode, dark, currency, toggleSideBar, favoritesAmount, isOpen, setCurrency} = CryptoState();
     const navigate = useNavigate();
-    const { currency, setCurrency } = CryptoState()
-
     const handleChange = (e) => {
         setCurrency(e.target.value);
-    }
-    const { dark, toggleDarkMode } = CryptoState();
+    };
 
-    const addedCoins = JSON.parse(localStorage.getItem("favoriteCoins"));
     return (
         <>
             <ThemeProvider theme={theme} >
@@ -43,7 +41,7 @@ const Navbar = () => {
                             <div onClick={toggleDarkMode} className='border border-secondary hover:bg-secondary transition duration-300 py-2 px-1 flex text-offwhite hover:cursor-pointer rounded-md'>
                                 {!dark ? (
                                     <div>
-                                        <BsFillSunFill size={24} />
+                                        <FaSun size={24} />
                                     </div>
                                 ) : (
                                     <div>
@@ -51,10 +49,10 @@ const Navbar = () => {
                                     </div>
                                 )}
                             </div>
-                            <div onClick={''} className='border border-secondary hover:bg-secondary transition duration-300 py-2 px-1 rounded-md text-offwhite relative'>
+                            <div onClick={toggleSideBar} className='cursor-pointer border border-secondary hover:bg-secondary transition duration-300 py-2 px-1 rounded-md text-offwhite relative'>
                                 <MdOutlineFavorite size={24} />
                                 <div className='absolute -top-1 -right-2 rounded-full bg-offwhite font-semibold text-primary h-4 text-center w-4 text-[10px]'>
-                                    {addedCoins?.length === 0 ? '0' : addedCoins.length}
+                                    {favoritesAmount}
                                 </div>
                             </div>
                         </div>

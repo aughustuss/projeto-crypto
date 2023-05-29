@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { CryptoState } from '../Contexts/Context'
 import AliceCarousel from 'react-alice-carousel'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 const Hero = () => {
-    const { dark, currency, symbol, price, trendingCoin} = CryptoState();
-
+    const { dark, currency, symbol, price } = CryptoState();
+    const [trendingCoins, setTrendingCoins] = useState([]);
     const responsive = {
         0: {
             items: 2
@@ -18,8 +19,19 @@ const Hero = () => {
         1024: {
             items: 6,
         }
-    }
-    const items = trendingCoin.map((item) => {
+    };
+
+    const getTrendingCoins = async () => {
+        try {
+            const trendingCoin = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h`);
+            setTrendingCoins(trendingCoin.data);
+        } catch (error) {
+            console.log(error)
+        };
+    };
+
+
+    const items = trendingCoins.map((item) => {
         let profit = item.price_change_percentage_24h >= 0;
         return (
             <Link
