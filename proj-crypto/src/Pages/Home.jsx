@@ -1,9 +1,5 @@
-import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
-import { TrendingCoins } from '../Config/Api'
+import React from 'react'
 import { CryptoState } from '../Contexts/Context'
-import AliceCarousel from 'react-alice-carousel'
-import { Link } from 'react-router-dom'
 import CoinsTable from '../Components/CoinsTable'
 import Hero from '../Components/Hero'
 

@@ -4,35 +4,19 @@ import axios from 'axios'
 import { CryptoState } from '../Contexts/Context'
 import { CoinList } from '../Config/Api'
 import { LinearProgress, Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, ThemeProvider } from '@mui/material'
-
+import {theme, StyledTextField} from '../Config/Theme'
 const CoinsTable = () => {
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(true)
     const [coin, setCoin] = useState([]);
     const [page, setPage] = useState(1)
-    const { currency, dark, theme, StyledTextField, symbol, price } = CryptoState();
+    const { currency, dark, symbol, price, coinList } = CryptoState();
     const navigate = useNavigate();
+    console.log("context: ", coinList);
+    console.log("fora do contexto: ", coin);
 
-    const fetchCoins = async () => {
-        try {
-            const res = await axios.get(CoinList(currency), {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-               
-            })
-            setCoin(res.data);
-            setLoading(false)
-        } catch (err) {
-            console.log(err);
-        }
-    }
 
-    useEffect(() => {
-        fetchCoins();
-    }, [currency]);
-
-    const filteredSearch = search.length > 0 ? coin.filter(item => item.name.toLowerCase().includes(search.toLowerCase())) : [];
+    const filteredSearch = search.length > 0 ? coinList.filter(item => item.name.toLowerCase().includes(search.toLowerCase())) : [];
     return (
         <>
             <ThemeProvider theme={theme}>
@@ -52,7 +36,7 @@ const CoinsTable = () => {
                                 <LinearProgress />
                             ) : (
                                 <Table >
-                                    <TableHead className='bg-purple-800 w-full flex' >
+                                    <TableHead className='bg-primary w-full flex' >
                                         <TableRow>
                                             {['Moeda', 'Preço', 'Mudança em 24h', 'Valor total do Mercado'].map((item) => {
                                                 return (
@@ -106,7 +90,7 @@ const CoinsTable = () => {
                                                 )
                                             })
                                         ) : (
-                                            coin.slice((page - 1) * 10, (page - 1) * 10 + 10).map((row) => {
+                                            coinList.slice((page - 1) * 10, (page - 1) * 10 + 10).map((row) => {
                                                 let profit = row.price_change_percentage_24h >= 0;
                                                 return (
                                                     <TableRow className='hover:bg-neutral-600 transition duration-300 h-16 hover:cursor-pointer' key={row.name} onClick={() => { navigate(`/coin/${row.name}`) }}  >
@@ -144,7 +128,7 @@ const CoinsTable = () => {
                             )}
                         </TableContainer>
                         <Pagination
-                            count={(coin.length / 10).toFixed(2)}
+                            count={(coinList.length / 10).toFixed(2)}
                             style={{
                                 justifyContent: 'center',
                                 alignItems: 'center',

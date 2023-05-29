@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { HistoricalChart } from '../Config/Api'
 import { CryptoState } from '../Contexts/Context';
 import axios from 'axios';
@@ -12,7 +12,8 @@ import {
 import { Line } from 'react-chartjs-2'
 import { chartDays } from '../Config/Data';
 import { LinearProgress, ThemeProvider } from '@mui/material';
-
+import { theme } from '../Config/Theme'
+import { useParams } from 'react-router-dom';
 Chart.register(
   LinearScale,
   CategoryScale,
@@ -22,102 +23,83 @@ Chart.register(
 
 const CoinInfo = ({ coin }) => {
 
-  const [loading, setLoading] = useState(true);
-  const [historicalData, setHistoricalData] = useState([]);
-  const [days, setDays] = useState(1);
   const [selected, setSelected] = useState();
-  const { currency, theme } = CryptoState();
-
-  const fetchData = async () => {
-    try {
-      const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
-      setHistoricalData(data.prices);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
+  const { currency, days, setDays, getHistoricalCoin, historicalCoin } = CryptoState();
+  const { id } = useParams();
   useEffect(() => {
-    fetchData();
-  }, [days, currency])
-
+    getHistoricalCoin(id);
+  }, [days, currency]);
   return (
     <>
       <ThemeProvider theme={theme}>
         <div className='flex h-full w-full'>
-          {!loading && historicalData.length > 1 ? (
-            <div className='flex w-full h-full justify-between flex-col'>
-              <p className='text-center text-4xl'> {`Variação em ${days} ${days > 1 ? 'dias' : 'dia'}`}</p>
-              <Line
-                data={{
-                  labels: historicalData.map((item) => {
-                    let date = new Date(item[0]);
-                    let time = `${(date.getHours() + 24) % 24}:${date.getMinutes()}`;
-                    return days === 1 ? time : date.toLocaleDateString();
-                  }),
-                  datasets: [
-                    {
-                      label: 'Preço',
-                      data: historicalData.map((coin) => coin[1]),
-                      borderColor: "rgb(126, 34, 206)",
-                      axis: 'y',
-                      fill: false,
-                      borderWidth: 2
-                    }
-                  ],
-                }}
-                options={{
-                  elements: {
-                    point: {
-                      radius: 1,
-                      backgroundColor: 'white',
-                      pointStyle: 'circle',
-                      borderWidth: 1,
-                      borderColor: '#fff'
+
+          <div className='flex w-full h-full justify-between flex-col'>
+            <p className='text-center text-4xl'> {`Variação em ${days} ${days > 1 ? 'dias' : 'dia'}`}</p>
+            <Line
+              data={{
+                labels: historicalCoin?.prices?.map((item) => {
+                  let date = new Date(item[0]);
+                  let time = `${(date.getHours() + 24) % 24}:${date.getMinutes()}`;
+                  return days === 1 ? time : date.toLocaleDateString();
+                }),
+                datasets: [
+                  {
+                    label: 'Preço',
+                    data: historicalCoin?.prices?.map((cap) => cap[1]),
+                    borderColor: "#065f46",
+                    axis: 'y',
+                    fill: false,
+                    borderWidth: 2
+                  }
+                ],
+              }}
+              options={{
+                elements: {
+                  point: {
+                    radius: 1,
+                    backgroundColor: 'white',
+                    pointStyle: 'circle',
+                    borderWidth: 1,
+                    borderColor: '#fff'
+                  }
+                },
+                responsive: true,
+                scales: {
+                  x: {
+                    display: true,
+                    title: {
+                      display: true,
+                      text: 'Tempo'
                     }
                   },
-                  responsive: true,
-                  scales: {
-                    x: {
+                  y: {
+                    display: true,
+                    title: {
                       display: true,
-                      title: {
-                        display: true,
-                        text: 'Tempo'
-                      }
-                    },
-                    y: {
-                      display: true,
-                      title: {
-                        display: true,
-                        text: `Preço ( Últimos ${days} dias ) em ${currency}`,
-                        color: 'rgb(126, 34, 206)'
-                      }
+                      text: `Preço ( Últimos ${days} dias ) em ${currency}`,
+                      color: '#065f46'
                     }
-                  },
-                }}
-              />
-              <div className='flex lg:flex-row flex-col w-full justify-between mt-8 p-2 gap-2 lg:gap-8'>
-                {chartDays.map((day) => {
-                  return (
-                    <button
-                      key={day.value}
-                      onClick={() => {
-                        setDays(day.value);
-                        setSelected(day.value);
-                      }}
-                      value={day.value}
-                      className={`${selected === day.value ? 'border-purple-900 bg-purple-900 font-semibold ' : 'border-purple-600'} border-2 w-full rounded-md p-2 hover:bg-purple-600 transition duration-500`}>{day.label}</button>
-                  )
-                })}
-              </div>
+                  }
+                },
+              }}
+            />
+            <div className='flex lg:flex-row flex-col w-full justify-between mt-8 p-2 gap-2 lg:gap-8'>
+              {chartDays.map((day) => {
+                return (
+                  <button
+                    key={day.value}
+                    onClick={() => {
+                      setDays(day.value);
+                      setSelected(day.value);
+                    }}
+                    value={day.value}
+                    className={`${selected === day.value ? 'border-primary bg-primary font-semibold ' : 'border-secondary'} border-2 w-full rounded-md p-2 hover:bg-secondary transition duration-500`}>{day.label}</button>
+                )
+              })}
             </div>
-          ) : (
-            <div className='flex text-center items-center justify-center w-full h-full flex-col'>
-              <p className='flex w-full' >Carregando...</p>
-              <LinearProgress />
-            </div>
-          )}
+          </div>
+          )
         </div>
       </ThemeProvider>
     </>

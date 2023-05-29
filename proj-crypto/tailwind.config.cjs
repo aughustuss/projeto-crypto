@@ -12,6 +12,12 @@ module.exports = {
         lato : ['Lato', 'sans-serif'],
         montserrat: ['Montserrat', 'sans-serif'],
         roboto: ['Roboto', 'sans-serif']
+      },
+      colors: {
+        primary: "#065f46",
+        secondary: "#047857",
+        offwhite: '#f1f1f1',
+        gray: '#8c8b8b',
       }
     },
   },

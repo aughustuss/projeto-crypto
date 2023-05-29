@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { CryptoState } from '../Contexts/Context'
-import { TrendingCoins } from '../Config/Api'
 import AliceCarousel from 'react-alice-carousel'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 const Hero = () => {
-    const { dark, currency, symbol, price } = CryptoState();
-    const [trending, setTrending] = useState([]);
+    const { dark, currency, symbol, price, trendingCoin} = CryptoState();
 
     const responsive = {
         0: {
@@ -19,22 +16,10 @@ const Hero = () => {
             items: 5
         },
         1024: {
-            items: 7,
+            items: 6,
         }
     }
-    const fetchCoins = async () => {
-        const res = await axios.get(TrendingCoins(currency), {
-            headers: {
-                'Content-Type': 'Application/json'
-            }
-        })
-        setTrending(res.data)
-    };
-
-    useEffect(() => {
-        fetchCoins();
-    }, [currency]);
-    const items = trending.map((item) => {
+    const items = trendingCoin.map((item) => {
         let profit = item.price_change_percentage_24h >= 0;
         return (
             <Link
@@ -57,11 +42,10 @@ const Hero = () => {
                 <div className='h-4/6 md:h-5/6 lg:h-5/6 flex items-center text-center flex-col  pt-24' >
                     <div className='h-1/2 w-full  justify-evenly gap-4 flex flex-col'>
                         <p className={`${dark ? 'text-black' : 'text-white'} text-6xl md:text-8xl`}>Análise de Criptomoedas</p>
-                        <p className='text-neutral-400' >Tenha todas as informações de qualquer moeda ou procure a sua favorita!</p>
+                        <p className='text-gray' >Tenha todas as informações de qualquer moeda ou procure a sua favorita!</p>
                     </div>
-                    <div className=' w-full justify-center items-center flex'>
+                    <div className='justify-center items-center '>
                         <AliceCarousel
-                            mouseTracking
                             infinite
                             autoPlay
                             autoPlayInterval={1000}
