@@ -31,12 +31,16 @@ const CoinInfo = ({ coin }) => {
   const getHistoricalCoin = async () => {
     console.log(id);
     try {
-        const historicalCoin = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=${currency}&days=${days}`);
-        setHistoricalCoin(historicalCoin.data);
+      const historicalCoin = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=${currency}&days=${days}`);
+      setHistoricalCoin(historicalCoin.data);
     } catch (error) {
-        console.log(error);
+      console.log(error);
     };
-};
+  };
+
+  console.log(historicalCoin);
+
+  useEffect(() => {getHistoricalCoin()}, [days, currency]);
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -46,7 +50,7 @@ const CoinInfo = ({ coin }) => {
             <p className='text-center text-4xl'> {`Variação em ${days} ${days > 1 ? 'dias' : 'dia'}`}</p>
             <Line
               data={{
-                labels: historicalCoin?.prices?.map((item) => {
+                labels: historicalCoin?.map((item) => {
                   let date = new Date(item[0]);
                   let time = `${(date.getHours() + 24) % 24}:${date.getMinutes()}`;
                   return days === 1 ? time : date.toLocaleDateString();
@@ -107,7 +111,6 @@ const CoinInfo = ({ coin }) => {
               })}
             </div>
           </div>
-          )
         </div>
       </ThemeProvider>
     </>

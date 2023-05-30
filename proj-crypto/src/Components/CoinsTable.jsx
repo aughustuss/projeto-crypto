@@ -26,6 +26,7 @@ const CoinsTable = () => {
             console.log(error);
         }
     };
+    useEffect(() => {getCoinList()}, [currency])
     return (
         <>
             <ThemeProvider theme={theme}>
