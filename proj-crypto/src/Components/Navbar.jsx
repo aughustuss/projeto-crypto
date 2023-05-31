@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import {  BsMoonFill } from 'react-icons/bs'
-import {FaSun} from 'react-icons/fa'
+import { BsMoonFill } from 'react-icons/bs'
+import { FaSun } from 'react-icons/fa'
 import { MdOutlineFavorite } from 'react-icons/md'
-import { MenuItem, ThemeProvider } from '@mui/material'
+import { ThemeProvider } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { CryptoState } from '../Contexts/Context'
 import { theme } from '../Config/Theme'
-import { StyledTextField } from '../Config/Theme'
+import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 const Navbar = () => {
-    const {toggleDarkMode, dark, currency, toggleSideBar, favoritesAmount, isOpen, setCurrency} = CryptoState();
+    const { toggleDarkMode, dark, currency, toggleSideBar, favoritesAmount, isOpen, setCurrency } = CryptoState();
+    const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
     const handleChange = (e) => {
         setCurrency(e.target.value);
@@ -18,7 +19,7 @@ const Navbar = () => {
         <>
             <ThemeProvider theme={theme} >
                 <nav className='bg-primary fixed shadow-md z-40 w-full transition duration-500 py-1' >
-                    <div className='flex items-center justify-between mx-auto w-5/6'>
+                    <div className='flex items-center justify-between mx-auto container px-4 lg:px-0'>
                         <p onClick={() => {
                             navigate('/')
                         }} className='text-xl md:text-2xl hover:cursor-pointer text-offwhite font-oswald text-center font-semibold flex flex-col md:gap-y-[2px]'>
@@ -26,18 +27,14 @@ const Navbar = () => {
                             <span className='md:text-xs text-[10px] text-center text-offwhite uppercase'>Análise de Criptomoedas</span>
                         </p>
                         <div className='flex gap-4 justify-center items-center'>
-                            <StyledTextField
-                                variant='outlined'
-                                value={currency}
-                                label='Moeda'
-                                select
-                                size='small'
-                                onChange={handleChange}
-                                style={{ color: 'white' }}
-                            >
-                                <MenuItem value={'BRL'} >BRL</MenuItem>
-                                <MenuItem value={'USD'}>USD</MenuItem>
-                            </StyledTextField>
+                            <div className='relative flex flex-row items-center border-secondary rounded-md  text-offwhite border'>
+                                <select value={currency} onClick={() => setMenuOpen(!menuOpen)} onChange={handleChange} className='bg-transparent outline-none w-full py-2 px-5'>
+                                    <option className='text-black' value={"BRL"}>BRL</option>
+                                    <option className='text-black' value={"USD"}>USD</option>
+                                </select>
+                                {!menuOpen ? <IoMdArrowDropdown className='absolute right-1'/> : <IoMdArrowDropup className='absolute right-1'/>}
+                                <p className='absolute -top-2 left-2 bg-primary pr-1 text-secondary text-xs'>Moeda</p>
+                            </div>
                             <div onClick={toggleDarkMode} className='border border-secondary hover:bg-secondary transition duration-300 py-2 px-1 flex text-offwhite hover:cursor-pointer rounded-md'>
                                 {!dark ? (
                                     <div>

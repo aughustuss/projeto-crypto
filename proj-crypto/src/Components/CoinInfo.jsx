@@ -11,7 +11,7 @@ import {
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 import { chartDays } from '../Config/Data';
-import { LinearProgress, ThemeProvider } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import { theme } from '../Config/Theme'
 import { useParams } from 'react-router-dom';
 Chart.register(
@@ -21,7 +21,7 @@ Chart.register(
   LineElement
 )
 
-const CoinInfo = ({ coin }) => {
+const CoinInfo = () => {
 
   const [selected, setSelected] = useState();
   const { currency, days, setDays } = CryptoState();
@@ -29,17 +29,13 @@ const CoinInfo = ({ coin }) => {
   const { id } = useParams();
 
   const getHistoricalCoin = async () => {
-    console.log(id);
     try {
-      const historicalCoin = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=${currency}&days=${days}`);
+      const historicalCoin = await axios.get(`https://api.coingecko.com/api/v3/coins/${(id).toLowerCase()}/market_chart?vs_currency=${currency}&days=${days}`);
       setHistoricalCoin(historicalCoin.data);
     } catch (error) {
       console.log(error);
     };
   };
-
-  console.log(historicalCoin);
-
   useEffect(() => {getHistoricalCoin()}, [days, currency]);
   return (
     <>
@@ -50,7 +46,7 @@ const CoinInfo = ({ coin }) => {
             <p className='text-center text-4xl'> {`Variação em ${days} ${days > 1 ? 'dias' : 'dia'}`}</p>
             <Line
               data={{
-                labels: historicalCoin?.map((item) => {
+                labels: historicalCoin?.prices?.map((item) => {
                   let date = new Date(item[0]);
                   let time = `${(date.getHours() + 24) % 24}:${date.getMinutes()}`;
                   return days === 1 ? time : date.toLocaleDateString();

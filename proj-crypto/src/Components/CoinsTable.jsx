@@ -30,10 +30,10 @@ const CoinsTable = () => {
     return (
         <>
             <ThemeProvider theme={theme}>
-                <div className='w-full ' >
+                <div className='w-full text-gray' >
                     <div className='w-full flex flex-col gap-4 pt-12'>
                         <div id='searchDiv' className='flex flex-col gap-4'>
-                            <p className={`${dark ? 'text-black' : 'text-white'} text-4xl text-center`}>Veja todas as informações das suas Cripto Moedas preferidas!</p>
+                            <p className='text-4xl text-center'>Veja todas as informações das suas Cripto Moedas preferidas!</p>
                             <StyledTextField
                                 label='Pesquise por uma moeda'
                                 fullWidth
@@ -52,7 +52,7 @@ const CoinsTable = () => {
                                                 return (
                                                     <TableCell
                                                         style={{
-                                                            color: (dark ? 'black' : 'white'),
+                                                            color : '#f1f1f1',
                                                             fontWeight: '600',
                                                             fontSize: '90%'
                                                         }}

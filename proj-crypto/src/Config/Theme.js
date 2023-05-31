@@ -23,6 +23,20 @@ export const theme = createTheme({
                     fontSize: '12px'
                 }
             }
+        },
+        MuiTableRow: {
+            styleOverrides: {
+                root: {
+                    border: '#FFFFFF'
+                },
+            },
+        },
+        MuiTableCell: {
+            styleOverrides: {
+                root: {
+                    border: '#FFFFFF'
+                }
+            }
         }
     },
     palette: {

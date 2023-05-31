@@ -15,6 +15,8 @@ const CryptoContext = ({ children }) => {
     const [days, setDays] = useState(1);
     
     const [isOpen, setIsOpen] = useState(false);
+    const [addedCoin, setAddedCoin] = useState(false);
+    const [alreadyAdded, setAlreadyAdded] = useState(false);
 
     const [favorites, setFavorites] = useState([]);
     const [alreadyAddedCoins, setAlreadyAddedCoins] = useState([]);
@@ -40,23 +42,18 @@ const CryptoContext = ({ children }) => {
             return acc + item.amount;
         }, 0);
         setFavoritesAmount(itemAmount);
-    }, [alreadyAddedCoins])
+    }, [alreadyAddedCoins]);
     
-    const toggleSideBar = () => {
-        setIsOpen(!isOpen);
-    };
-    const toggleDarkMode = () => {
-        setDark(!dark);
-    };
-
     const handleFavoriteCoin = (coin) => {
         const newCoin = { ...coin, amount : 1 };
+        console.log(alreadyAddedCoins);
         const coinExists = alreadyAddedCoins.some((c) => c.id === newCoin.id);
         if (!coinExists) {
-            const newCoins = [...Object.values(alreadyAddedCoins), newCoin];
+            const newCoins = [...alreadyAddedCoins, newCoin];
             localStorage.setItem("favoriteCoins", JSON.stringify(newCoins));
+            setAddedCoin(true);
         } else {
-            alert("ja foi adicionado.")
+            setAlreadyAdded(true);
         }
     };
 
@@ -67,11 +64,18 @@ const CryptoContext = ({ children }) => {
         localStorage.setItem("favoriteCoins", JSON.stringify(newCoins));
         console.log(newCoins);
     };
+    const toggleSideBar = () => {
+        setIsOpen(!isOpen);
+    };
+    const toggleDarkMode = () => {
+        setDark(!dark);
+    };
+
 
     return (
         <Crypto.Provider
             value={{
-                currency, setCurrency, symbol, dark, toggleDarkMode, toggleSideBar,handleDelete, isOpen, price, days, setDays, favorites, setFavorites, handleFavoriteCoin, favoritesAmount
+                currency, setCurrency, symbol, dark, toggleDarkMode, toggleSideBar,handleDelete, isOpen, price, days, setDays, favorites, setFavorites, handleFavoriteCoin, favoritesAmount, addedCoin, alreadyAdded, setAddedCoin, setAlreadyAdded
             }}
         >
             {children}
