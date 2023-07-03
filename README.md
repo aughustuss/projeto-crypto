@@ -23,7 +23,7 @@ Uma aplicação que permite a visualização e filtragem de Cripto moedas. Além
 
 ## Instalação
 
-Instale proj-crypto
+Instale projeto-crypto
 
 ```bash
   npm i
@@ -35,6 +35,11 @@ Instale proj-crypto
 
 ```bash
   yarn add
+```
+Rode projeto-crypto
+
+```bash
+  npm run dev
 ```
     
 ## Link para o projeto 
